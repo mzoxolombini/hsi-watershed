@@ -126,7 +126,6 @@ def run_bo(fitness_fn, seed: int, budget: int = 750) -> dict:
 
         for _ in range(guided_n):
             x = np.asarray(optimizer.ask(), dtype=float)
-            x += rng.normal(0.0, 1e-9, size=x.shape)
             xr = _repair(x)
             fit = float(fitness_fn(xr))
             optimizer.tell(list(x), -fit)

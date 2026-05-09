@@ -181,7 +181,7 @@ def run_watershed_pipeline(
 
     inv_grad = -gradient
     valid_inv = inv_grad[gt_mask]
-    threshold_abs = float(np.quantile(valid_inv, p["t"])) if valid_inv.size else float(np.max(inv_grad))
+    threshold_abs = float(np.quantile(valid_inv, p["t"])) if valid_inv.size else float(np.min(inv_grad))
     coords = peak_local_max(inv_grad, labels=gt_mask.astype(np.uint8), min_distance=3, threshold_abs=threshold_abs)
 
     markers = np.zeros((h, w), dtype=np.int32)
