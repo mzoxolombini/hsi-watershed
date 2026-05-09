@@ -5,7 +5,7 @@ from scipy.stats import norm
 
 try:
     from scipy.stats import qmc
-except Exception:  # pragma: no cover
+except ImportError:  # pragma: no cover
     qmc = None
 
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -14,7 +14,7 @@ from sklearn.gaussian_process.kernels import ConstantKernel, Matern, WhiteKernel
 try:
     from skopt import Optimizer
     _HAS_SKOPT = True
-except Exception:  # pragma: no cover
+except ImportError:  # pragma: no cover
     _HAS_SKOPT = False
 
 
@@ -139,5 +139,5 @@ def run_bo(fitness_fn, seed: int, budget: int = 750) -> dict:
             "best_fitness": float(best_fitness),
             "evaluations": int(budget),
         }
-    except Exception:
+    except (TypeError, ValueError, RuntimeError, AttributeError):
         return _run_manual_bo(fitness_fn, seed=seed, budget=budget)

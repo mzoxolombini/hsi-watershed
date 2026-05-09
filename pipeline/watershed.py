@@ -78,8 +78,13 @@ def load_dataset(dataset_name: str, data_dir: str | Path = "data") -> tuple[np.n
     data_mat = loadmat(data_path)
     gt_mat = loadmat(gt_path)
 
-    data_key = spec["data_key"] if spec["data_key"] in data_mat else next(k for k in data_mat if not k.startswith("__"))
-    gt_key = spec["gt_key"] if spec["gt_key"] in gt_mat else next(k for k in gt_mat if not k.startswith("__"))
+    data_keys = [k for k in data_mat.keys() if not k.startswith("__")]
+    gt_keys = [k for k in gt_mat.keys() if not k.startswith("__")]
+    if not data_keys or not gt_keys:
+        raise KeyError(f"Unable to locate dataset keys for {dataset_name}.")
+
+    data_key = spec["data_key"] if spec["data_key"] in data_mat else data_keys[0]
+    gt_key = spec["gt_key"] if spec["gt_key"] in gt_mat else gt_keys[0]
 
     return data_mat[data_key].astype(np.float32), gt_mat[gt_key].astype(np.int32)
 
