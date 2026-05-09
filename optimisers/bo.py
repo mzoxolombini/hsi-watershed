@@ -96,7 +96,7 @@ def run_bo(fitness_fn, seed: int, budget: int = 750) -> dict:
     init_n = 15
     guided_n = 735
     if init_n + guided_n != budget:
-        raise ValueError("BO budget must be exactly 15 + 735 = 750.")
+        raise ValueError(f"BO budget must be exactly init_n + guided_n ({init_n} + {guided_n} = {init_n + guided_n}).")
 
     if not _HAS_SKOPT:
         return _run_manual_bo(fitness_fn, seed=seed, budget=budget)

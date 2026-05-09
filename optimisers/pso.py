@@ -23,7 +23,7 @@ def run_pso(fitness_fn, seed: int, budget: int = 750) -> dict:
     c2 = 1.5
 
     if n_particles * iterations != budget:
-        raise ValueError("PSO budget must be exactly particles * iterations (15*50=750).")
+        raise ValueError(f"PSO budget must be exactly particles * iterations ({n_particles}*{iterations}={n_particles * iterations}).")
 
     rng = np.random.default_rng(seed)
 

@@ -29,7 +29,7 @@ def run_standard_ga(fitness_fn, seed: int, budget: int = 750) -> dict:
     mutation_sigma = 0.1 * RANGE
 
     if population_size * generations != budget:
-        raise ValueError("Standard GA budget must be exactly population * generations (15*50=750).")
+        raise ValueError(f"Standard GA budget must be exactly population * generations ({population_size}*{generations}={population_size * generations}).")
 
     rng = np.random.default_rng(seed)
     population = np.vstack([_repair(rng.uniform(LOW, HIGH)) for _ in range(population_size)])

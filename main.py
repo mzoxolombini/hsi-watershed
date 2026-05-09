@@ -46,11 +46,9 @@ def run_experiment() -> None:
                 dataset_name=dataset,
                 seed=seed,
             )
-            def fitness_fn(params):
-                return evaluator.evaluate(params)[0]
 
             for name, optimiser in OPTIMISERS.items():
-                best = optimiser(fitness_fn, seed=seed, budget=BUDGET)
+                best = optimiser(evaluator.fitness, seed=seed, budget=BUDGET)
                 pipeline_out = run_watershed_pipeline(image, gt, best["best_params"], train_mask=train_mask, seed=seed)
                 metrics = compute_metrics(gt, pipeline_out["prediction"], eval_mask=test_mask)
 

@@ -145,7 +145,7 @@ def _build_classifier(classifier_index: int, seed: int):
     if classifier_index == 0:
         return RandomForestClassifier(n_estimators=200, max_depth=20, random_state=seed, n_jobs=-1)
     if classifier_index == 1:
-        return SVC(kernel="rbf", C=100, gamma=0.01)
+        return SVC(kernel="rbf", C=100, gamma=0.01, random_state=seed)
     if classifier_index == 2:
         return KNeighborsClassifier(n_neighbors=5, metric="euclidean")
     raise ValueError(f"Unknown classifier index: {classifier_index}")

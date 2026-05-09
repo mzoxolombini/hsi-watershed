@@ -21,7 +21,7 @@ def run_de(fitness_fn, seed: int, budget: int = 750) -> dict:
     CR = 0.9
 
     if pop_size * generations != budget:
-        raise ValueError("DE budget must be exactly population * generations (15*50=750).")
+        raise ValueError(f"DE budget must be exactly population * generations ({pop_size}*{generations}={pop_size * generations}).")
 
     rng = np.random.default_rng(seed)
 

@@ -45,3 +45,7 @@ class FitnessEvaluator:
     def objective(self, params: Sequence[float]) -> float:
         fit, _ = self.evaluate(params)
         return -fit
+
+    def fitness(self, params: Sequence[float]) -> float:
+        fit, _ = self.evaluate(params)
+        return fit

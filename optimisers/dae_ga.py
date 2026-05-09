@@ -78,7 +78,7 @@ def run_dae_ga(fitness_fn, seed: int, budget: int = 750) -> dict:
     crossover_prob = 0.8
 
     if population_size * generations != budget:
-        raise ValueError("DAE-GA budget must be exactly population * generations (15*50=750).")
+        raise ValueError(f"DAE-GA budget must be exactly population * generations ({population_size}*{generations}={population_size * generations}).")
 
     rng = np.random.default_rng(seed)
     population = np.vstack([_random_chromosome(rng) for _ in range(population_size)])
